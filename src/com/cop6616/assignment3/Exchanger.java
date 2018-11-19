@@ -34,23 +34,47 @@ public class Exchanger<T>
 
             int stamp = stampHolder[0];
 
-            switch(stamp)
+            switch (stamp)
             {
+
                 case EMPTY:
-                    EmptySlot(curItem, newItem, stamp, timeAllowed);
+                    if(slot.compareAndSet(curItem, newItem, EMPTY, WAITING))
+                    {
+                        while (System.nanoTime() < timeBound)
+                        {
+                            curItem = slot.get(stampHolder);
+                            stamp = stampHolder[0];
+
+                            if (stamp == BUSY)
+                            {
+                                slot.set(null, EMPTY);
+                                return curItem;
+                            }
+                        }
+
+                        if (slot.compareAndSet(newItem, null, WAITING, EMPTY))
+                        {
+                            throw new TimeoutException();
+                        }
+                        else
+                        {
+                            curItem = slot.get(stampHolder);
+                            slot.set(null, EMPTY);
+                            return curItem;
+                        }
+                    }
+                    break;
+
+                case WAITING:
+                    if(slot.compareAndSet(curItem, newItem, WAITING, BUSY))
+                    {
+                        return curItem;
+                    }
                     break;
                 case BUSY:
-                    break;
-                case WAITING:
-                    break;
                 default:
                     break;
             }
         }
-    }
-
-    private T EmptySlot(T curItem, T newItem, int stamp, long timeAllowed)
-    {
-
     }
 }
