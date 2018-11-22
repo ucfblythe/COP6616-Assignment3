@@ -1,0 +1,66 @@
+Standard Lock Free Stack
+Test #1: 1 Threads / 0.039953868 Seconds
+Test #1: 1 Threads / 0.030839149 Seconds
+Test #1: 1 Threads / 0.01931169 Seconds
+Test #1: 1 Threads / 0.027999311 Seconds
+Test #1: 1 Threads / 0.019920643 Seconds
+Test #2: 2 Threads / 0.143431479 Seconds
+Test #2: 2 Threads / 0.144154641 Seconds
+Test #2: 2 Threads / 0.065546407 Seconds
+Test #2: 2 Threads / 0.072298422 Seconds
+Test #2: 2 Threads / 0.139302636 Seconds
+Test #3: 4 Threads / 0.544095646 Seconds
+Test #3: 4 Threads / 0.595537326 Seconds
+Test #3: 4 Threads / 0.187814625 Seconds
+Test #3: 4 Threads / 0.256857659 Seconds
+Test #3: 4 Threads / 0.320690672 Seconds
+Test #4: 8 Threads / 1.291509095 Seconds
+Test #4: 8 Threads / 1.13352915 Seconds
+Test #4: 8 Threads / 0.564106559 Seconds
+Test #4: 8 Threads / 0.46798396 Seconds
+Test #4: 8 Threads / 0.843250275 Seconds
+Test #5: 16 Threads / 2.687508093 Seconds
+Test #5: 16 Threads / 2.480664469 Seconds
+Test #5: 16 Threads / 1.502370443 Seconds
+Test #5: 16 Threads / 0.966242916 Seconds
+Test #5: 16 Threads / 1.874694581 Seconds
+Test #6: 32 Threads / 5.082570638 Seconds
+Test #6: 32 Threads / 4.662804945 Seconds
+Test #6: 32 Threads / 2.647001849 Seconds
+Test #6: 32 Threads / 2.029109701 Seconds
+Test #6: 32 Threads / 3.300182258 Seconds
+
+
+
+
+Elimination Backoff Results
+Test #1: 1 Threads / 0.044581418 Seconds
+Test #1: 1 Threads / 0.038008845 Seconds
+Test #1: 1 Threads / 0.020794649 Seconds
+Test #1: 1 Threads / 0.013528493 Seconds
+Test #1: 1 Threads / 0.022649407 Seconds
+Test #2: 2 Threads / 0.058006589 Seconds
+Test #2: 2 Threads / 0.048097898 Seconds
+Test #2: 2 Threads / 0.033240395 Seconds
+Test #2: 2 Threads / 0.033747613 Seconds
+Test #2: 2 Threads / 0.033601524 Seconds
+Test #3: 4 Threads / 0.086031015 Seconds
+Test #3: 4 Threads / 0.149419188 Seconds
+Test #3: 4 Threads / 0.048564692 Seconds
+Test #3: 4 Threads / 0.049329346 Seconds
+Test #3: 4 Threads / 0.082878018 Seconds
+Test #4: 8 Threads / 0.388153061 Seconds
+Test #4: 8 Threads / 0.327554038 Seconds
+Test #4: 8 Threads / 0.113940655 Seconds
+Test #4: 8 Threads / 0.18455049 Seconds
+Test #4: 8 Threads / 0.141691666 Seconds
+Test #5: 16 Threads / 0.98898629 Seconds
+Test #5: 16 Threads / 1.023997002 Seconds
+Test #5: 16 Threads / 0.22150083 Seconds
+Test #5: 16 Threads / 0.478435762 Seconds
+Test #5: 16 Threads / 0.421255828 Seconds
+Test #6: 32 Threads / 1.23473214 Seconds
+Test #6: 32 Threads / 1.388038018 Seconds
+Test #6: 32 Threads / 0.23887545 Seconds
+Test #6: 32 Threads / 0.456850406 Seconds
+Test #6: 32 Threads / 0.591680641 Seconds

@@ -36,9 +36,7 @@ class StackTestThread implements Runnable
 
             while(!found)
             {
-                int choice = random.nextInt(3);
-
-                if (choice == 0 && ( pushCount == 0 || pushCount / totalCount < pushr))
+                if ( pushCount == 0 || pushCount / totalCount <= pushr)
                 {
                     Integer rnd = random.nextInt(10);
                     stack.Push(rnd);
@@ -47,8 +45,8 @@ class StackTestThread implements Runnable
 
                     //System.out.println("PUSH: " + rnd);
                 }
-
-                if (choice == 1 && ( popCount == 0 || popCount / totalCount < popr))
+                else
+                if ( popCount == 0 || popCount / totalCount <= popr)
                 {
                     Integer val = stack.Pop();
                     popCount++;
@@ -56,8 +54,8 @@ class StackTestThread implements Runnable
 
                     //System.out.println("POP: " + val);
                 }
-
-                if (choice == 2 && (numOpsCount == 0 || numOpsCount / totalCount < numOpsCount))
+                else
+                if (numOpsCount == 0 || numOpsCount / totalCount <= opsr)
                 {
                     int ops = stack.GetNumOps();
                     numOpsCount++;

@@ -30,7 +30,7 @@ public class Main {
         Vector<Thread> threads = new Vector<Thread>();
 
         //NUmber of operations each thread will attempt
-        int range = 100000;
+        int range = 1000000;
 
         //Creates a StackTestThread instance thread and stores it for retrieval later
         for(int i=0; i < numThreads; i++)
@@ -71,6 +71,8 @@ public class Main {
         {
             try
             {
+                ConcurStackTest(i + 1, (int) Math.pow(2, i), 0.85f, 0.15f, 0.00f);
+                ConcurStackTest(i + 1, (int) Math.pow(2, i), 0.75f, 0.25f, 0.00f);
                 ConcurStackTest(i + 1, (int) Math.pow(2, i), 0.45f, 0.05f, 0.50f);
                 ConcurStackTest(i + 1, (int) Math.pow(2, i), 0.35f, 0.15f, 0.50f);
                 ConcurStackTest(i + 1, (int) Math.pow(2, i), 0.50f, 0.35f, 0.15f);
