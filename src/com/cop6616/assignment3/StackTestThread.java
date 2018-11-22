@@ -6,13 +6,25 @@ class StackTestThread implements Runnable
 {
     private Stack<Integer> stack;
     private int range =0;
+    private float pushr=0;
+    private float popr=0;
+    private float opsr=0;
+    private float pushCount=0;
+    private float popCount=0;
+    private float numOpsCount=0;
+    private float totalCount=0;
 
-    StackTestThread(int _range, Stack<Integer> _stack)
+    //Concurrent driver for the test
+    StackTestThread(int _range, Stack<Integer> _stack, float _pushr, float _popr, float _opsr)
     {
         range = _range;
         stack = _stack;
+        pushr = _pushr;
+        popr = _popr;
+        opsr = _opsr;
     }
 
+    //Runs a test with a random choice of action, bounded by passed in proportions on each action.
     @Override
     public void run()
     {
@@ -20,15 +32,43 @@ class StackTestThread implements Runnable
 
         for(int i = 0; i < range; i ++)
         {
-            if(i % 2 == 0)
+            boolean found = false;
+
+            while(!found)
             {
-                Integer rnd = random.nextInt(10);
-                stack.Push(rnd);
+                int choice = random.nextInt(3);
+
+                if (choice == 0 && ( pushCount == 0 || pushCount / totalCount < pushr))
+                {
+                    Integer rnd = random.nextInt(10);
+                    stack.Push(rnd);
+                    pushCount++;
+                    found = true;
+
+                    //System.out.println("PUSH: " + rnd);
+                }
+
+                if (choice == 1 && ( popCount == 0 || popCount / totalCount < popr))
+                {
+                    Integer val = stack.Pop();
+                    popCount++;
+                    found = true;
+
+                    //System.out.println("POP: " + val);
+                }
+
+                if (choice == 2 && (numOpsCount == 0 || numOpsCount / totalCount < numOpsCount))
+                {
+                    int ops = stack.GetNumOps();
+                    numOpsCount++;
+                    found = true;
+
+                    //System.out.println("OPs: " + ops);
+                }
+
             }
-            else
-            {
-                stack.Pop();
-            }
+
+            totalCount++;
         }
     }
 }

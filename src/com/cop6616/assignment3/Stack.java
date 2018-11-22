@@ -5,9 +5,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Stack<T>
 {
+    private static final int capacity = 10;
+    private static final int range = 10;
     private AtomicReference<Node<T>> head;
     private AtomicInteger numOps;
     private T default_flag;
+    private EliminationArray<T> elimArray;
 
     //Constructor for the stack that takes in a default_flag. Since the type is generic, and we need to return a value
     //on a failed pop, we need an applicable T value to denote an empty pop. The head and numops are initialized as well.
@@ -16,6 +19,7 @@ public class Stack<T>
         default_flag = _default_flag;
         head = new AtomicReference<>(null);
         numOps = new AtomicInteger(0);
+        elimArray = new EliminationArray<T>(capacity);
     }
 
     //Allows a value to be pushed into the stack concurrently
@@ -35,6 +39,21 @@ public class Stack<T>
         {
             newNode.next = head.get();
             swapped = head.compareAndSet(newNode.next, newNode);
+
+            //FAILED = Try elimination back off
+            if(!swapped)
+            {
+                try
+                {
+                    T other = elimArray.EliminationCheck(x, range);
+                    swapped = other == null;
+
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
         }
 
         //Atomically increment the numOps value, since this variable is an atomic, the ++ operation acts like a fetch and add
@@ -78,6 +97,25 @@ public class Stack<T>
             // place in one instantaneous transaction, forming the linearization point of the numops increment operation.
 
             swapped =  head.compareAndSet(oldHead, oldHead.next);
+
+            //FAILED = Try elimination back off
+            if(!swapped)
+            {
+                try
+                {
+                    T other = elimArray.EliminationCheck(null, range);
+                    swapped = other != null;
+                    if(swapped)
+                    {
+                        val = other;
+                    }
+
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
         }
 
         numOps.getAndIncrement();
